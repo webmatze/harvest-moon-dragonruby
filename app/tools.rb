@@ -1,4 +1,29 @@
 # tools.rb
+class Tools
+  attr_accessor :tools
+
+  def initialize
+    @tools = []
+  end
+
+  def any?(tool_class)
+    @tools.any? { |tool| tool.is_a?(tool_class) }
+  end
+
+  def <<(tool)
+    @tools << tool
+  end
+
+  def each
+    @tools.each do |tool|
+      yield tool
+    end
+  end
+
+  def group_by_class
+    @tools.group_by { |tool| tool.class }
+  end
+end
 
 class Tool
   attr_accessor :name, :sprite, :durability

@@ -36,6 +36,20 @@ class Crops
     @crop_tiles = {}
   end
 
+  def any?(crop_class)
+    @crop_tiles.any? { |crop| crop.is_a?(crop_class) }
+  end
+
+  def each
+    @crop_tiles.each do |crop|
+      yield crop
+    end
+  end
+
+  def group_by_class
+    @crop_tiles.group_by { |crop| crop.class }
+  end
+
   def plant_crop(x, y, type, sprite, max_growth_stage)
     @crop_tiles[[x, y]] = Crop.new(type, sprite, max_growth_stage)
   end

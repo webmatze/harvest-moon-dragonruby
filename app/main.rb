@@ -58,8 +58,6 @@ def init_game(args)
   args.state.inventory = Inventory.new
   args.state.market = Market.new
   args.state.tasks = Tasks.new
-  args.state.animals = Animals.new
-  args.state.crops = Crops.new
 end
 
 def render(args)
@@ -79,10 +77,10 @@ end
 def handle_input(args)
   # add a cow to the inventory
   if args.inputs.keyboard.key_down.c
-    args.state.inventory.add_item(:animals, :cow)
+    args.state.inventory.add_item(:animals, Cow)
   end
   # add a chicken to the inventory
   if args.inputs.keyboard.key_down.v
-    args.state.inventory.add_item(:animals, :chicken)
+    args.state.inventory.add_item(:animals, Chicken)
   end
 end

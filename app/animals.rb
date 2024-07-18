@@ -8,10 +8,28 @@ class Animals
     populate_initial_animals
   end
 
+  def any?(animal_class)
+    @animals.any? { |animal| animal.is_a?(animal_class) }
+  end
+
+  def <<(animal)
+    @animals << animal
+  end
+
+  def each
+    @animals.each do |animal|
+      yield animal
+    end
+  end
+
+  def group_by_class
+    @animals.group_by { |animal| animal.class }
+  end
+
   def populate_initial_animals
     # Add some initial animals to the farm
-    @animals << Animal.new('cow', 'sprites/animal/cow.png', 100)
-    @animals << Animal.new('chicken', 'sprites/animal/chicken.png', 50)
+    @animals << Cow.new
+    @animals << Chicken.new
   end
 
   def feed
@@ -34,10 +52,9 @@ class Animals
 end
 
 class Animal
-  attr_accessor :type, :sprite, :price, :fed
+  attr_accessor :sprite, :price, :fed
 
-  def initialize(type, sprite, price)
-    @type = type
+  def initialize(sprite, price)
     @sprite = sprite
     @price = price
     @fed = false
@@ -60,5 +77,17 @@ class Animal
       h: 32,
       path: @sprite
     }
+  end
+end
+
+class Cow < Animal
+  def initialize
+    super('sprites/animal/cow.png', 100)
+  end
+end
+
+class Chicken < Animal
+  def initialize
+    super('sprites/animal/chicken.png', 50)
   end
 end
