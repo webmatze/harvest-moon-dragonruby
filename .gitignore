@@ -1,0 +1,6 @@
+builds/
+logs/
+exceptions/
+.DS_Store
+smaug/*
+!smaug/.keep
