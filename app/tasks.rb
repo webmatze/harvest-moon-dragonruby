@@ -45,9 +45,6 @@ class Tasks
       y: 310,
       text: "Daily Tasks:",
       size_enum: 2,
-      r: 255,
-      g: 255,
-      b: 255,
       font: UI::FONT
     }.merge(UI::WHITE_COLOR)
 
@@ -57,9 +54,6 @@ class Tasks
         y: 250 - (index * 30),
         text: "- #{task[:description]}",
         size_enum: 1,
-        r: 255,
-        g: 255,
-        b: 255,
         font: UI::FONT
       }.merge(UI::WHITE_COLOR)
     end

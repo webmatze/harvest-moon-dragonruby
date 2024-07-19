@@ -17,8 +17,13 @@ class World
       @tiles[i][19] = Tile.new('wall', 'sprites/wall/wood.png', true)
     end
 
-    @tiles[10][10] = Tile.new('path', 'sprites/path/normal.png')
-    @tiles[10][11] = Tile.new('path', 'sprites/path/normal.png')
+    @tiles[15][10] = Tile.new('path', 'sprites/wall/wood.png', true)
+    @tiles[15][11] = Tile.new('path', 'sprites/wall/wood.png', true)
+    @tiles[15][12] = Tile.new('path', 'sprites/wall/wood.png', true)
+    @tiles[15][13] = Tile.new('path', 'sprites/wall/wood.png', true)
+    @tiles[15][14] = Tile.new('path', 'sprites/wall/wood.png', true)
+    @tiles[15][15] = Tile.new('path', 'sprites/wall/wood.png', true)
+    @tiles[15][16] = Tile.new('path', 'sprites/wall/wood.png', true)
   end
 
   def update(args)
@@ -34,7 +39,7 @@ class World
   end
 
   def tile_at(x, y)
-    return nil if x < 0 || y < 0 || x >= @tiles.length || y >= @tiles[0].length
-    @tiles[x][y]
+    return nil if x < 0 || y < 0 || y >= @tiles.length || x >= @tiles[0].length
+    @tiles[y][x]
   end
 end
