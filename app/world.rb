@@ -10,7 +10,7 @@ class World
   end
 
   def generate_world
-    @map_data.layers.each do |layer|
+    @map_data.layers.reverse.each do |layer|
       layer.tiles.each do |tile|
         @tiles[@map_data.map_height - tile.y - 1][tile.x] = get_tile(tile.id)
       end
@@ -20,10 +20,16 @@ class World
   def get_tile(id)
     case id
     when "0"
-      return Tile.new('wall', 'sprites/wall/wood.png', true)
+      return Tile.new('house', 'sprites/house/wood.png', true)
     when "1"
-      return Tile.new('soil', 'sprites/soil/normal.png')
+      return Tile.new('house', 'sprites/house/roof.png', true)
     when "2"
+      return Tile.new('house', 'sprites/house/door.png', true)
+    when "3"
+      return Tile.new('wall', 'sprites/wall/wood.png', true)
+    when "4"
+      return Tile.new('soil', 'sprites/soil/normal.png')
+    when "5"
       return Tile.new('path', 'sprites/path/normal.png')
     end
   end
