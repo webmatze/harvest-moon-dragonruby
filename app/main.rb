@@ -49,7 +49,7 @@ def init_game(args)
   args.state.player = Player.new
 
   # Initialize world
-  args.state.world = World.new
+  args.state.world = World.new("maps/map/map.json")
 
   # Initialize UI
   args.state.ui = UI.new

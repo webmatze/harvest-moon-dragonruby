@@ -1,29 +1,31 @@
 # world.rb
 
 class World
-  attr_accessor :tiles
+  attr_accessor :tiles, :map_data
 
-  def initialize
-    @tiles = Array.new(20) { Array.new(20) { Tile.new('soil', 'sprites/soil/normal.png') } }
+  def initialize(map_path)
+    @map_data = SpriteFusion::Tilemap.load($gtk.parse_json_file(map_path))
+    @tiles = Array.new(@map_data.map_height) { Array.new(@map_data.map_width) { Tile.new('soil', 'sprites/soil/normal.png') } }
     generate_world
   end
 
   def generate_world
-    # Example of generating some paths and walls
-    (0..19).each do |i|
-      @tiles[0][i] = Tile.new('wall', 'sprites/wall/wood.png', true)
-      @tiles[19][i] = Tile.new('wall', 'sprites/wall/wood.png', true)
-      @tiles[i][0] = Tile.new('wall', 'sprites/wall/wood.png', true)
-      @tiles[i][19] = Tile.new('wall', 'sprites/wall/wood.png', true)
+    @map_data.layers.each do |layer|
+      layer.tiles.each do |tile|
+        @tiles[@map_data.map_height - tile.y - 1][tile.x] = get_tile(tile.id)
+      end
     end
+  end
 
-    @tiles[15][10] = Tile.new('path', 'sprites/wall/wood.png', true)
-    @tiles[15][11] = Tile.new('path', 'sprites/wall/wood.png', true)
-    @tiles[15][12] = Tile.new('path', 'sprites/wall/wood.png', true)
-    @tiles[15][13] = Tile.new('path', 'sprites/wall/wood.png', true)
-    @tiles[15][14] = Tile.new('path', 'sprites/wall/wood.png', true)
-    @tiles[15][15] = Tile.new('path', 'sprites/wall/wood.png', true)
-    @tiles[15][16] = Tile.new('path', 'sprites/wall/wood.png', true)
+  def get_tile(id)
+    case id
+    when "0"
+      return Tile.new('wall', 'sprites/wall/wood.png', true)
+    when "1"
+      return Tile.new('soil', 'sprites/soil/normal.png')
+    when "2"
+      return Tile.new('path', 'sprites/path/normal.png')
+    end
   end
 
   def update(args)
