@@ -2,6 +2,8 @@
 
 A Harvest Moon-inspired farming simulation game built with DragonRuby GTK.
 
+![Harvest Moon header image](documentation/screenshot_20240719.png)
+
 ## Setup
 
 ### Prerequisites
