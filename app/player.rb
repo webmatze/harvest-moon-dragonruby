@@ -6,7 +6,7 @@ class Player
   def initialize
     @x = 5
     @y = 5
-    @sprite = 'sprites/player/normal.png'
+    @sprite = 'sprites/player/front.png'
     @tools = {
       hoe: Tool.new('Hoe', 'sprites/tool/hoe.png'),
       sickle: Tool.new('Sickle', 'sprites/tool/sickle.png'),
@@ -35,7 +35,7 @@ class Player
       x: @x * 32 + args.state.world_offset_x,
       y: @y * 32 + args.state.world_offset_y,
       w: 32,
-      h: 32,
+      h: 48,
       path: @sprite
     }
   end
