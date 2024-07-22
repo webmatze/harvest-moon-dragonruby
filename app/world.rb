@@ -1,11 +1,12 @@
 # world.rb
 
 class World
-  attr_accessor :tiles, :map_data
+  attr_accessor :tiles, :map_data, :spritesheet
 
   def initialize(map_path)
     @map_data = SpriteFusion::Tilemap.load($gtk.parse_json_file(map_path))
-    @tiles = Array.new(@map_data.map_height) { Array.new(@map_data.map_width) { Tile.new('soil', 'sprites/soil/normal.png') } }
+    @tiles = Array.new(@map_data.map_height) { Array.new(@map_data.map_width) { Tile.new('soil', 4) } }
+    @spritesheet = 'maps/map/spritesheet.png'
     generate_world
   end
 
@@ -20,17 +21,17 @@ class World
   def get_tile(id)
     case id
     when "0"
-      return Tile.new('house', 'sprites/house/wood.png', true)
+      Tile.new('house', id.to_i, true)
     when "1"
-      return Tile.new('house', 'sprites/house/roof.png', true)
+      Tile.new('house', id.to_i, true)
     when "2"
-      return Tile.new('house', 'sprites/house/door.png', true)
+      Tile.new('house', id.to_i, true)
     when "3"
-      return Tile.new('wall', 'sprites/wall/wood.png', true)
+      Tile.new('wall', id.to_i, true)
     when "4"
-      return Tile.new('soil', 'sprites/soil/normal.png')
+      Tile.new('soil', id.to_i)
     when "5"
-      return Tile.new('path', 'sprites/path/normal.png')
+      Tile.new('path', id.to_i)
     end
   end
 
@@ -41,7 +42,7 @@ class World
   def render(args)
     @tiles.each_with_index do |row, y|
       row.each_with_index do |tile, x|
-        tile.render(args, x, y)
+        tile.render(args, x, y, @spritesheet)
       end
     end
   end

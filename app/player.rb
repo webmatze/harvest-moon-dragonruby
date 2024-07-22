@@ -85,7 +85,7 @@ class Player
       tile_x = (corner_x / 32).floor
       tile_y = (corner_y / 32).floor
       tile = args.state.world.tile_at(tile_x, tile_y)
-      return false if tile.nil? || tile.blocked?
+      return false if tile.nil? || tile.solid?
     end
 
     true
